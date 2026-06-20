@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мальбэк × Сюзанна — Мерч</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --white: #FFFFFF;
+  --off-white: #F7F7F7;
+  --light: #EBEBEB;
+  --mid: #999999;
+  --dark: #333333;
+  --black: #111111;
+  --burg: #6B1E2E;
+  --burg-light: #9B3A4E;
+  --burg-dim: rgba(107,30,46,0.08);
+  --border: #E0E0E0;
+  --border-dark: #CCCCCC;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 58px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-style: italic; font-weight: 400;
+  color: var(--black);
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--mid);
+  text-decoration: none; transition: color .18s;
+}
+.nav-links a:hover { color: var(--black); }
+
+/* HERO */
+#hero {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 100vh; padding-top: 58px;
+}
+.hero-left {
+  background: var(--black); color: var(--white);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 3.5rem;
+}
+.hero-right {
+  background: var(--off-white);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 3.5rem;
+}
+.eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--burg);
+  margin-bottom: 18px;
+}
+.eyebrow-light {
+  font-size: 10px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--burg-light);
+  margin-bottom: 18px;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  font-weight: 300; line-height: 1.0;
+  color: var(--white); margin-bottom: 1.5rem;
+}
+h1 em { font-style: italic; color: var(--burg-light); }
+.hero-desc { font-size: 14px; color: #AAAAAA; line-height: 1.8; max-width: 380px; margin-bottom: 2.5rem; }
+.hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 300; color: var(--white); line-height: 1;
+}
+.stat-label { font-size: 10px; color: #777; letter-spacing: .07em; text-transform: uppercase; margin-top: 4px; }
+
+.hero-right h2-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 300; color: var(--black);
+}
+.concept-points { margin-top: 2rem; }
+.cp-item {
+  display: flex; gap: 1.25rem; align-items: flex-start;
+  padding: 1rem 0; border-bottom: 1px solid var(--border);
+}
+.cp-item:last-child { border-bottom: none; }
+.cp-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 300; color: var(--burg);
+  flex-shrink: 0; width: 28px; line-height: 1.2;
+}
+.cp-title { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 3px; }
+.cp-body { font-size: 12px; color: var(--mid); line-height: 1.6; }
+
+/* SECTION */
+.section { padding: 80px 3rem; max-width: 1100px; margin: 0 auto; }
+.section-wide { padding: 80px 3rem; }
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 300; color: var(--black);
+  margin-bottom: 6px; letter-spacing: -.01em;
+}
+h2 em { font-style: italic; color: var(--burg); }
+.section-sub { font-size: 14px; color: var(--mid); max-width: 520px; margin-bottom: 2.5rem; line-height: 1.75; }
+
+/* ITEMS GRID */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.item-card {
+  padding: 1.75rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background .18s;
+}
+.item-card:hover { background: var(--off-white); }
+.item-card:nth-child(3n) { border-right: none; }
+.item-tier {
+  font-size: 10px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.t-core { color: var(--black); }
+.t-opt  { color: var(--mid); }
+.item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem; font-weight: 400; color: var(--black);
+  margin-bottom: 8px; line-height: 1.2;
+}
+.item-desc { font-size: 12px; color: var(--mid); line-height: 1.7; margin-bottom: 12px; }
+.item-price {
+  font-size: 14px; font-weight: 500; color: var(--black);
+}
+.item-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
+.itag {
+  font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 2px;
+}
+.itag-burg { background: var(--burg-dim); color: var(--burg); }
+.itag-gray { background: var(--light); color: var(--dark); }
+
+/* PHASE TABS */
+.phase-bar {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  border: 1px solid var(--border); margin-bottom: 0;
+}
+.phase-tab {
+  padding: 1.25rem 1.5rem; cursor: pointer;
+  border-right: 1px solid var(--border);
+  transition: background .18s;
+}
+.phase-tab:last-child { border-right: none; }
+.phase-tab:hover { background: var(--off-white); }
+.phase-tab.active { background: var(--black); }
+.phase-tab.active .pt-num,
+.phase-tab.active .pt-name,
+.phase-tab.active .pt-time { color: var(--white); }
+.phase-tab.active .pt-num { color: var(--burg-light); }
+.pt-num { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--burg); margin-bottom: 6px; }
+.pt-name { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 2px; }
+.pt-time { font-size: 11px; color: var(--mid); }
+
+.phase-body {
+  border: 1px solid var(--border); border-top: none;
+  display: none; padding: 2rem;
+}
+.phase-body.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.5rem; }
+.pb-card { }
+.pb-label { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--burg); margin-bottom: 8px; }
+.pb-title { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 5px; }
+.pb-body { font-size: 12px; color: var(--mid); line-height: 1.7; }
+
+/* TIMELINE */
+.tl-wrap { position: relative; }
+.tl-track { position: absolute; left: 100px; top: 0; bottom: 0; width: 1px; background: var(--border); }
+.tl-item { display: grid; grid-template-columns: 100px 1fr; gap: 2rem; padding: 1.5rem 0 1.5rem 2rem; border-bottom: 1px solid var(--border); position: relative; }
+.tl-item:last-child { border-bottom: none; }
+.tl-dot { position: absolute; left: 95px; top: 22px; width: 9px; height: 9px; border-radius: 50%; background: var(--white); border: 2px solid var(--border-dark); }
+.tl-dot.key { background: var(--burg); border-color: var(--burg); }
+.tl-time { font-size: 11px; font-weight: 500; color: var(--mid); padding-top: 2px; line-height: 1.5; }
+.tl-time.key-time { color: var(--burg); font-weight: 600; }
+.tl-title { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
+.tl-body { font-size: 12px; color: var(--mid); line-height: 1.7; }
+.tl-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+
+/* CHANNELS TABLE */
+.ch-wrap { border: 1px solid var(--border); overflow: hidden; }
+.ch-table { width: 100%; border-collapse: collapse; }
+.ch-table th { text-align: left; padding: 10px 16px; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); border-bottom: 1px solid var(--border); background: var(--off-white); }
+.ch-table td { padding: 13px 16px; font-size: 13px; color: var(--mid); border-bottom: 1px solid var(--border); vertical-align: middle; }
+.ch-table tr:last-child td { border-bottom: none; }
+.ch-table td:first-child { font-weight: 500; color: var(--black); }
+.ch-table tr:hover td { background: var(--off-white); }
+.dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.dot-g { background: #2E7D4F; }
+.dot-a { background: #B8860B; }
+.dot-m { background: var(--mid); }
+
+/* PLATFORMS */
+.plat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--border); }
+.plat-card { padding: 1.75rem; border-right: 1px solid var(--border); transition: background .18s; }
+.plat-card:last-child { border-right: none; }
+.plat-card:hover { background: var(--off-white); }
+.plat-card.rec { background: var(--black); }
+.plat-card.rec .plat-name, .plat-card.rec .plat-price, .plat-card.rec .plat-feat li { color: var(--white); }
+.plat-card.rec .plat-feat li::before { color: var(--burg-light); }
+.rec-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; background: var(--burg); color: white; padding: 3px 10px; border-radius: 2px; margin-bottom: 12px; }
+.plat-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--black); margin-bottom: 4px; }
+.plat-price { font-size: 12px; font-weight: 500; color: var(--mid); margin-bottom: 12px; }
+.plat-feat { font-size: 12px; color: var(--mid); line-height: 1.8; }
+.plat-feat li { list-style: none; }
+.plat-feat li::before { content: '— '; color: var(--burg); }
+
+/* KPI */
+.kpi-grid { display: grid; grid-template-columns: repeat(6,1fr); border: 1px solid var(--border); }
+.kpi-cell { padding: 1.75rem 1rem; text-align: center; border-right: 1px solid var(--border); }
+.kpi-cell:last-child { border-right: none; }
+.kpi-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--black); line-height: 1; margin-bottom: 8px; }
+.kpi-desc { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--mid); line-height: 1.5; }
+
+/* HIGHLIGHT */
+.hl { border-left: 2px solid var(--burg); padding: 12px 18px; background: var(--burg-dim); margin: 1.5rem 0; font-size: 13px; line-height: 1.8; color: var(--dark); }
+.hl strong { color: var(--black); }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); text-align: center; padding: 3.5rem 3rem; color: var(--mid); font-size: 11px; letter-spacing: .08em; }
+footer .foot-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; font-style: italic; color: var(--black); margin-bottom: 0.75rem; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* FULL-WIDTH BANDS */
+.band-dark { background: var(--black); }
+.band-light { background: var(--off-white); }
+
+@media (max-width: 860px) {
+  #hero { grid-template-columns: 1fr; }
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  .section { padding: 60px 1.25rem; }
+  .items-grid { grid-template-columns: 1fr 1fr; }
+  .kpi-grid { grid-template-columns: repeat(3,1fr); }
+  .plat-grid { grid-template-columns: 1fr; }
+  .phase-bar { grid-template-columns: 1fr 1fr; }
+  .plat-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .plat-card:last-child { border-bottom: none; }
+}
+@media (max-width: 540px) {
+  .items-grid { grid-template-columns: 1fr; }
+  .item-card { border-right: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Мальбэк × Сюзанна</div>
+  <div class="nav-links">
+    <a href="#items">Айтемы</a>
+    <a href="#timeline">Таймлайн</a>
+    <a href="#channels">Каналы</a>
+    <a href="#platforms">Платформы</a>
+    <a href="#kpi">KPI</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="eyebrow-light">Мерч-концепт · Москва · 2025</div>
+    <h1>Мальбэк<br><em>×</em><br>Сюзанна</h1>
+    <p class="hero-desc">Коллекция к выходу альбома. Воссоединение, личные истории, ностальгия — в каждом айтеме единого бренда.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label">Айтемов</div>
+      </div>
+      <div>
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Каналов продаж</div>
+      </div>
+      <div>
+        <div class="stat-num">3–6</div>
+        <div class="stat-label">Мес. до релиза</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="eyebrow">Три принципа</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:var(--black);line-height:1.2;margin-bottom:1rem;">Единый бренд.<br>Тираж. Премиум.</div>
+    <div class="concept-points">
+      <div class="cp-item">
+        <div class="cp-num">I</div>
+        <div>
+          <div class="cp-title">Личная история в каждом айтеме</div>
+          <div class="cp-body">Рукописный текст, строчки из альбома, эстетика старых писем и воспоминаний.</div>
+        </div>
+      </div>
+      <div class="cp-item">
+        <div class="cp-num">II</div>
+        <div>
+          <div class="cp-title">Материал и тактильность</div>
+          <div class="cp-body">Плотные ткани, крафт-упаковка, сургучная печать. Распаковка — часть переживания.</div>
+        </div>
+      </div>
+      <div class="cp-item">
+        <div class="cp-num">III</div>
+        <div>
+          <div class="cp-title">Ограниченность создаёт ценность</div>
+          <div class="cp-body">Нумерованные тиражи, подпись артистов. Каждый экземпляр — единственный.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ITEMS -->
+<div class="section" id="items">
+  <div class="eyebrow reveal">Коллекция</div>
+  <h2 class="reveal">Айтемы <em>коллекции</em></h2>
+  <p class="section-sub reveal">Шесть основных позиций — одежда и аксессуары. Плюс виниловая пластинка как опция к альбому.</p>
+
+  <div class="items-grid reveal">
+
+    <div class="item-card">
+      <div class="item-tier t-core">Одежда · Флагман</div>
+      <div class="item-name">Зип-худи</div>
+      <div class="item-desc">Оверсайз, плотный флис 380 г/м². Вышитый логотип на груди, рукописная строчка из альбома на рукаве. Цвета: чёрный, антрацит, молочный.</div>
+      <div class="item-price">7 500 — 9 000 ₽</div>
+      <div class="item-tags">
+        <span class="itag itag-burg">Флагман</span>
+        <span class="itag itag-gray">Вышивка</span>
+        <span class="itag itag-gray">Тираж 150 шт.</span>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-tier t-core">Одежда</div>
+      <div class="item-name">Лонгслив</div>
+      <div class="item-desc">Плотный хлопок 240 г/м², оверсайз-фит. Принт на спине — архивное фото или иллюстрация в духе ностальгии. Три цвета.</div>
+      <div class="item-price">4 500 — 5 500 ₽</div>
+      <div class="item-tags">
+        <span class="itag itag-gray">DTG / шелкография</span>
+        <span class="itag itag-gray">Тираж 150 шт.</span>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-tier t-core">Одежда</div>
+      <div class="item-name">Футболка</div>
+      <div class="item-desc">Stanley/Stella base, унисекс. Принт: конверт пластинки или рукописный текст. Чёрная и белая — базовый выбор, третий цвет — тематический.</div>
+      <div class="item-price">3 200 — 4 000 ₽</div>
+      <div class="item-tags">
+        <span class="itag itag-gray">DTG-принт</span>
+        <span class="itag itag-gray">Тираж 200 шт.</span>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-tier t-core">Головные уборы</div>
+      <div class="item-name">Кепка</div>
+      <div class="item-desc">6-панельная структурированная кепка. Вышитый логотип спереди, малый логотип сзади. Чёрная и кремово-белая. Регулируемый ремешок.</div>
+      <div class="item-price">2 800 — 3 500 ₽</div>
+      <div class="item-tags">
+        <span class="itag itag-gray">Вышивка</span>
+        <span class="itag itag-gray">Тираж 100 шт.</span>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-tier t-core">Головные уборы</div>
+      <div class="item-name">Шапка</div>
+      <div class="item-desc">Рибана 100% акрил или шерстяная смесь. Вышитый логотип сбоку или спереди. Цвета: чёрная, тёмно-бордовая, кремовая.</div>
+      <div class="item-price">2 200 — 2 800 ₽</div>
+      <div class="item-tags">
+        <span class="itag itag-burg">Бордо — тематич.</span>
+        <span class="itag itag-gray">Вышивка</span>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-tier t-core">Аксессуар</div>
+      <div class="item-name">Брелок</div>
+      <div class="item-desc">Металл или акрил, до 5 см. Форм-фактор: мини-пластинка, конверт, буква «М» или «С», дата релиза альбома. Низкий порог входа.</div>
+      <div class="item-price">500 — 900 ₽</div>
+      <div class="item-tags">
+        <span class="itag itag-gray">Входная точка</span>
+        <span class="itag itag-gray">Высокая маржа</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VINYL AS OPTION -->
+  <div class="hl reveal" style="margin-top:1.75rem">
+    <strong>Опция к альбому — виниловая пластинка.</strong> Лимитированный тираж 200–300 экз., цветной винил, авторский конверт с рукописными текстами. Нумерация и подпись артистов на первых 50. Производство: Timeless (Чехия) или GZ Media, срок 10–14 недель от мастера. Дистрибуция: собственный сайт + Vinylbox.ru.
+  </div>
+
+  <div class="hl reveal">
+    <strong>Упаковка — часть продукта.</strong> Крафт-коробка, вощёная бумага, карточка «от артистов» — открытие снимают на видео. Бесплатный UGC без усилий.
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TIMELINE -->
+<div class="section" id="timeline">
+  <div class="eyebrow reveal">Таймлайн</div>
+  <h2 class="reveal">От сейчас <em>до релиза</em></h2>
+  <p class="section-sub reveal">Альбом выходит через 3–6 месяцев. Мерч должен появиться в один день с музыкой.</p>
+
+  <div class="tl-wrap reveal">
+    <div class="tl-track"></div>
+    <div class="tl-item">
+      <div class="tl-dot key"></div>
+      <div class="tl-time key-time">Сейчас<br>Месяц 1</div>
+      <div>
+        <div class="tl-title">Концепция и дизайн</div>
+        <div class="tl-body">Утверждение айтемов, цветов, материалов. Техмакеты под печать и вышивку. Мудборд и референсы. Выбор производителей в Москве.</div>
+        <div class="tl-tags"><span class="itag itag-burg">Дизайнер</span><span class="itag itag-gray">Мудборд</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Месяц 1–2</div>
+      <div>
+        <div class="tl-title">Заказ производства</div>
+        <div class="tl-body">Размещение заказа на зип-худи, лонгсливы, футболки (8–10 недель). Кепки и шапки — 4–6 недель. Брелки — 3–4 недели. Если планируется винил — передать мастер на завод сейчас (критичный путь, 10–14 нед.).</div>
+        <div class="tl-tags"><span class="itag itag-burg">Критичный путь</span><span class="itag itag-gray">Параллельно</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Месяц 2</div>
+      <div>
+        <div class="tl-title">Запуск сайта + предзаказ</div>
+        <div class="tl-body">InSales-магазин выходит в эфир. Открывается предзаказ худи и брелка-дата. Telegram-анонс + тизер-видео. Цель: 100+ предзаказов до релиза.</div>
+        <div class="tl-tags"><span class="itag itag-burg">Предзаказ</span><span class="itag itag-gray">Telegram</span><span class="itag itag-gray">VK</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">За 2 недели<br>до релиза</div>
+      <div>
+        <div class="tl-title">Фотосессия и контент</div>
+        <div class="tl-body">Профессиональная съёмка всей линейки — на модели, белый фон для маркетплейсов, lifestyle для соцсетей. Всё снять за один день, готовить к публикации заранее.</div>
+        <div class="tl-tags"><span class="itag itag-gray">Съёмка</span><span class="itag itag-gray">Контент-план</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot key"></div>
+      <div class="tl-time key-time">День<br>релиза</div>
+      <div>
+        <div class="tl-title">🎵 Альбом + старт продаж мерча</div>
+        <div class="tl-body">Одновременный запуск: альбом в стримингах — мерч на сайте — отправка предзаказов. Первый концерт: стол с эксклюзивным постером даты релиза.</div>
+        <div class="tl-tags"><span class="itag itag-burg">Главный день</span><span class="itag itag-burg">Концертный стол</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Месяц +1–2</div>
+      <div>
+        <div class="tl-title">Выход на Ozon → Wildberries</div>
+        <div class="tl-body">Через InSales — единый каталог, единые остатки по всем каналам. Сначала Ozon (проще вход), потом WB. Яндекс Маркет — для худи и аксессуаров.</div>
+        <div class="tl-tags"><span class="itag itag-gray">Ozon</span><span class="itag itag-gray">WB</span><span class="itag itag-gray">Яндекс Маркет</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">Месяц +3</div>
+      <div>
+        <div class="tl-title">Второй дроп</div>
+        <div class="tl-body">Новая позиция или лимитированный цвет. Поддерживает интерес к альбому спустя квартал. Анонс через Telegram-канал — ранний доступ для подписчиков.</div>
+        <div class="tl-tags"><span class="itag itag-gray">Дроп</span><span class="itag itag-gray">Лимитед</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CHANNELS -->
+<div class="section" id="channels">
+  <div class="eyebrow reveal">Каналы продаж</div>
+  <h2 class="reveal">Где <em>продавать</em></h2>
+
+  <div class="ch-wrap reveal">
+    <table class="ch-table">
+      <thead>
+        <tr>
+          <th>Канал</th>
+          <th>Формат</th>
+          <th>Комиссия</th>
+          <th>Старт</th>
+          <th>Зачем</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Концертный стол</td>
+          <td>Офлайн</td>
+          <td><span class="dot dot-g"></span>0%</td>
+          <td>День 1</td>
+          <td>Пик эмоции — лучшая конверсия. Постер только здесь</td>
+        </tr>
+        <tr>
+          <td>Сайт (InSales)</td>
+          <td>D2C онлайн</td>
+          <td><span class="dot dot-g"></span>0%</td>
+          <td>День 1</td>
+          <td>Полная маржа. Данные покупателей. Предзаказ</td>
+        </tr>
+        <tr>
+          <td>Telegram Mini App</td>
+          <td>Мессенджер</td>
+          <td><span class="dot dot-g"></span>0%</td>
+          <td>День 1</td>
+          <td>Открываемость 70%. Анонсы дропов напрямую</td>
+        </tr>
+        <tr>
+          <td>VK Музыка / Мерч</td>
+          <td>Соцсеть</td>
+          <td><span class="dot dot-a"></span>уточнять</td>
+          <td>Неделя 2</td>
+          <td>Нативная аудитория артистов. Встроен в страницу</td>
+        </tr>
+        <tr>
+          <td>Planeta.ru</td>
+          <td>Краудфандинг</td>
+          <td><span class="dot dot-a"></span>~10%</td>
+          <td>Месяц 2</td>
+          <td>Предзаказ без риска остатков. Фаны платят вперёд</td>
+        </tr>
+        <tr>
+          <td>Ozon</td>
+          <td>Маркетплейс</td>
+          <td><span class="dot dot-a"></span>15–20%</td>
+          <td>Месяц 2</td>
+          <td>Проще вход, хорошая аналитика. Ср. чек ~1 800 ₽</td>
+        </tr>
+        <tr>
+          <td>Wildberries</td>
+          <td>Маркетплейс</td>
+          <td><span class="dot dot-a"></span>~25%</td>
+          <td>Месяц 3</td>
+          <td>Крупнейший охват в РФ. Хорошо для футболок и шапок</td>
+        </tr>
+        <tr>
+          <td>Яндекс Маркет</td>
+          <td>Маркетплейс</td>
+          <td><span class="dot dot-a"></span>10–15%</td>
+          <td>Месяц 3</td>
+          <td>Высокий средний чек ~4 900 ₽. Подходит для худи</td>
+        </tr>
+        <tr>
+          <td>Vinylbox.ru</td>
+          <td>Спец. магазин</td>
+          <td><span class="dot dot-a"></span>~20–30%</td>
+          <td>Опция</td>
+          <td>Если будет винил — главная площадка для коллекционеров</td>
+        </tr>
+        <tr>
+          <td>Поп-ап / маркеты</td>
+          <td>Офлайн</td>
+          <td><span class="dot dot-m"></span>аренда</td>
+          <td>Месяц 4–6</td>
+          <td>Artplay, Флакон, Ламбада-маркет. Новая аудитория</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PLATFORMS -->
+<div class="section" id="platforms">
+  <div class="eyebrow reveal">Платформы для сайта</div>
+  <h2 class="reveal">На чём <em>строить</em></h2>
+  <p class="section-sub reveal">Три реальных варианта для российского рынка — без Shopify, который не поддерживает местный эквайринг.</p>
+
+  <div class="plat-grid reveal">
+    <div class="plat-card rec">
+      <div class="rec-badge">Рекомендуем</div>
+      <div class="plat-name">InSales</div>
+      <div class="plat-price">от 2 500 ₽ / мес</div>
+      <ul class="plat-feat">
+        <li>Сайт + WB + Ozon из одного окна</li>
+        <li>200+ интеграций</li>
+        <li>СДЭК, Boxberry из коробки</li>
+        <li>ЮКасса и СБП</li>
+        <li>Яндекс Метрика</li>
+        <li>Чековый принтер / кассы</li>
+      </ul>
+    </div>
+    <div class="plat-card">
+      <div class="plat-name">Tilda Business</div>
+      <div class="plat-price">от 1 990 ₽ / мес</div>
+      <ul class="plat-feat">
+        <li>Лучший визуал и дизайн</li>
+        <li>Быстрый запуск без разработчика</li>
+        <li>Хорошо до 50 SKU</li>
+        <li>Нет прямой интеграции WB / Ozon</li>
+        <li>ЮКасса и T-Pay</li>
+      </ul>
+    </div>
+    <div class="plat-card">
+      <div class="plat-name">WordPress + WooCommerce</div>
+      <div class="plat-price">от 500 ₽ / мес (хостинг)</div>
+      <ul class="plat-feat">
+        <li>Полная гибкость</li>
+        <li>Нужен разработчик</li>
+        <li>Самостоятельная поддержка</li>
+        <li>Плагины под любую задачу</li>
+        <li>Подходит для масштаба</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl reveal" style="margin-top:1.5rem">
+    <strong>Эквайринг:</strong> ЮКасса (~3.5%) — стандарт для сайта · <strong>СБП (0–0.4%)</strong> — обязательно на концертном столе · T-Pay / Тинькофф — резерв.
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- KPI -->
+<div class="section" id="kpi">
+  <div class="eyebrow reveal">Метрики</div>
+  <h2 class="reveal">KPI <em>первого года</em></h2>
+  <div class="kpi-grid reveal">
+    <div class="kpi-cell">
+      <div class="kpi-num">100+</div>
+      <div class="kpi-desc">Предзаказов до релиза</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-num">≥ 2%</div>
+      <div class="kpi-desc">Конверсия сайта</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-num">6 500 ₽</div>
+      <div class="kpi-desc">Средний чек</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-num">25%</div>
+      <div class="kpi-desc">Повторные покупки</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-num">15%</div>
+      <div class="kpi-desc">Мерч от выручки концерта</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-num">70%</div>
+      <div class="kpi-desc">Открываемость Telegram</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">Мальбэк × Сюзанна</div>
+  <div>Мерч-концепт · Москва · 2025</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
